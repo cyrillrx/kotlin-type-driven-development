@@ -13,24 +13,25 @@ class UploadWorkflowTest {
 
     @Test
     fun `after calling upload, the photo is uploaded`() {
-        val photo = SimplePhoto("path/to/photo.jpg")
+        val photoToUpload = SimplePhoto("path/to/photo.jpg")
 
-        workflow.addPhoto(photo)
+        val uploadedPhoto = workflow.addPhoto(photoToUpload)
 
-        assertTrue(photo.isUploaded())
+        assertTrue(uploadedPhoto.isUploaded())
         assertTrue(workflow.allPhotosUploaded())
     }
 
     @Test
     fun `after calling upload, upload can be altered`() {
-        val photo = SimplePhoto("path/to/photo.jpg")
+        val photoToUpload = SimplePhoto("path/to/photo.jpg")
 
-        workflow.addPhoto(photo)
+        val uploadedPhoto = workflow.addPhoto(photoToUpload)
 
         // Altering the uploaded hash
-        photo.uploadedHash = null
+        uploadedPhoto.uploadedHash = null
 
-        assertFalse(photo.isUploaded())
+        // Yeah, the code is broken!
+        assertFalse(uploadedPhoto.isUploaded())
         assertFalse(workflow.allPhotosUploaded())
     }
 }
