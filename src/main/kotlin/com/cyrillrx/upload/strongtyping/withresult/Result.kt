@@ -1,4 +1,6 @@
-package com.cyrillrx.upload.strongtyping.withresult.error
+package com.cyrillrx.upload.strongtyping.withresult
+
+import com.cyrillrx.upload.strongtyping.withresult.error.DomainError
 
 sealed interface Result<out Data, out E : DomainError> {
     data class Success<out Data>(val value: Data) : Result<Data, Nothing>

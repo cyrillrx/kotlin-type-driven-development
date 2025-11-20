@@ -2,9 +2,8 @@ package com.cyrillrx.upload.strongtyping.withresult
 
 import com.cyrillrx.upload.strongtyping.Photo
 import com.cyrillrx.upload.strongtyping.withresult.error.ResizerError
-import com.cyrillrx.upload.strongtyping.withresult.error.Result
 import com.cyrillrx.upload.strongtyping.withresult.error.UploaderError
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class UploadWorkflowTest {
