@@ -3,7 +3,7 @@ package com.cyrillrx.search.data
 import com.cyrillrx.search.criteria.ProfileSearchCriteria
 
 // No Result handling here because input is compliant by typing
-interface ESQueryFactory {
+object ESQueryFactory {
 
     fun create(criteria: ProfileSearchCriteria): ESQuery {
         val parameters = when (criteria) {

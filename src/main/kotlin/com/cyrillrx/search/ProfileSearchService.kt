@@ -9,11 +9,10 @@ import com.cyrillrx.search.error.ElasticSearchError
 import com.cyrillrx.search.error.SearchServiceError
 
 class ProfileSearchService(
-    val esQueryFactory: ESQueryFactory,
     val esDataSource: ESDataSource,
 ) {
     fun search(criteria: ProfileSearchCriteria): Result<List<Profile>, SearchServiceError> {
-        val esQuery = esQueryFactory.create(criteria)
+        val esQuery = ESQueryFactory.create(criteria)
         val esResponse = esDataSource.search(esQuery)
         return esResponse.toProfiles()
     }
