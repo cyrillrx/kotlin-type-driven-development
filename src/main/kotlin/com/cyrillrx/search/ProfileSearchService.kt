@@ -18,12 +18,17 @@ class ProfileSearchService(
     }
 
     private fun ESResponse.toProfiles(): Result<List<Profile>, ElasticSearchError> {
-        return try {
-            val profiles = documents.mapNotNull { it.toProfile() }
-            Result.Success(profiles)
-        } catch (e: Exception) {
-            Result.Failure(ElasticSearchError.UnableToParseEsResponse(this))
+        if (documents.isEmpty()) {
+            return Result.Failure(ElasticSearchError.NoProfilesFound)
         }
+
+        val profiles = documents.mapNotNull { it.toProfile() }
+
+        if (profiles.isEmpty()) {
+            return Result.Failure(ElasticSearchError.EmptyWithParsingErrors)
+        }
+
+        return Result.Success(profiles)
     }
 
     private fun ESDocument.toProfile(): Profile? {
