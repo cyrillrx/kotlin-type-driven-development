@@ -2,9 +2,9 @@ package com.cyrillrx.search.data
 
 import com.cyrillrx.search.criteria.ProfileSearchCriteria
 
-// No Result handling here because input is compliant by typing
 object ESQueryFactory {
 
+    // No Result handling here because input is compliant by typing
     fun create(criteria: ProfileSearchCriteria): ESQuery {
         val parameters = when (criteria) {
             is ProfileSearchCriteria.Timeline -> criteria.toESQuery()

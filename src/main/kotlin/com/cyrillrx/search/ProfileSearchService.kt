@@ -12,9 +12,13 @@ class ProfileSearchService(
     val esDataSource: ESDataSource,
 ) {
     fun search(criteria: ProfileSearchCriteria): Result<List<Profile>, SearchServiceError> {
-        val esQuery = ESQueryFactory.create(criteria)
-        val esResponse = esDataSource.search(esQuery)
-        return esResponse.toProfiles()
+        return try {
+            val esQuery = ESQueryFactory.create(criteria)
+            val esResponse = esDataSource.search(esQuery)
+            esResponse.toProfiles()
+        } catch (e: Exception) {
+            Result.Failure(ElasticSearchError.Unknown(e.message))
+        }
     }
 
     private fun ESResponse.toProfiles(): Result<List<Profile>, ElasticSearchError> {
